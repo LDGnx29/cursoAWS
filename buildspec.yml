@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-version:
+      nodejs: 20
+    command:
+      - echo Installing dependencies
+      - npm install
+  build:
+    commands:
+      - echo Creating Depploy Packages
+      - npm run build
+  post_build:
+    commands:
+      - echo Copying archives from the package
+      - cp -r scripts dist/curso-aws/browser/
+      - cp appspec.yml dist/curso-aws/browser/
+artifacs:
+  files:
+    - 'scripts/**/*'
+    - 'appspec.yml'
+    - '**/*'
+  base-directory: ./dist/curso-aws/broser/
